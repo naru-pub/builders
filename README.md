@@ -11,11 +11,16 @@ the same handoff as anyone's builder, the SDK's
 
 - `index.html`: the list of builders. It is not a builder itself.
 - `profile/`: 소개 페이지, a photo, a name, a line, an introduction, links and
-  an accent color. `page.js` makes the page and `page.css` is its
-  stylesheet; `builder.js` is the form and the handoff, as the builder
-  `profile`. What the visitor writes stays in their browser
-  (`localStorage`), so they can come back to it. The Naru apps list it in
-  내 사이트.
+  an accent color, laid out as a card or as a link page (its links as big
+  buttons first).
+- `resume/`: 이력서, a name and role, contacts, experience, education and
+  skills, also laid out for printing.
+- `shared/`: the form and preview styles every builder uses.
+
+In each builder, `page.js` makes the page and `page.css` is its stylesheet,
+handed over as the site's `style.css`; `builder.js` is the form and the
+handoff. What the visitor writes stays in their browser (`localStorage`), so
+they can come back to it. The Naru apps list the builders in 내 사이트.
 
 Each builder is a folder of `site/`, named in `propose({ builder })` after
 its folder, and keeps what it stores in the browser under its own key:

@@ -4,18 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>소개 페이지 만들기 · 나루</title>
-    <link rel="stylesheet" href="builder.css" />
+    <link rel="stylesheet" href="../shared/builder.css" />
   </head>
   <body>
     <header>
       <h1>소개 페이지 만들기</h1>
-      <p>사진, 이름, 소개와 링크를 한 장에 담은 홈페이지예요. 다 고치면 ‘내 사이트에 적용’을 누르세요.</p>
+      <p>사진, 이름, 소개와 링크를 한 장에 담은 홈페이지예요. 소개 카드로도, 링크 모음으로도 꾸밀 수 있어요. 다 고치면 ‘내 사이트에 적용’을 누르세요.</p>
     </header>
     <div class="layout">
       <section class="preview" aria-label="미리 보기">
         <iframe id="preview" title="미리 보기" sandbox></iframe>
       </section>
       <form id="form" class="form">
+        <fieldset>
+          <legend>모양</legend>
+          <div class="choices">
+            <label><input type="radio" name="layout" value="card" /> 소개 카드</label>
+            <label><input type="radio" name="layout" value="links" /> 링크 모음</label>
+          </div>
+          <p class="help">링크 모음은 링크를 큰 버튼으로 이름 바로 아래에 보여 줘요.</p>
+        </fieldset>
         <fieldset>
           <legend>프로필 사진</legend>
           <div class="photo">

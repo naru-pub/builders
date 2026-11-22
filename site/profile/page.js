@@ -6,7 +6,11 @@
   "use strict";
 
   var ACCENTS = ["#EF9F27", "#378ADD", "#1D9E75", "#D4537E", "#7F77DD", "#444441"];
+  // card: the introduction first, its links below. links: a link page, its
+  // links as big buttons right under the name, the introduction after them.
+  var LAYOUTS = ["card", "links"];
   var DEFAULTS = {
+    layout: "card",
     name: "나루",
     tagline: "나루에 띄운 작은 홈페이지예요.",
     about: "",
@@ -34,7 +38,7 @@
   }
 
   /**
-   * The page from the owner's values: { name, tagline, about, links, accent }
+   * The page from the owner's values: { layout, name, tagline, about, links, accent }
    * and `photo`, the photo's file name on the site if there is one. With
    * `inlineStyle`, the stylesheet goes in the page (the builder's preview);
    * otherwise it links style.css.
@@ -44,6 +48,7 @@
     var name = values.name || DEFAULTS.name;
     var tagline = values.tagline || DEFAULTS.tagline;
     var accent = ACCENTS.indexOf(values.accent) >= 0 ? values.accent : DEFAULTS.accent;
+    var layout = LAYOUTS.indexOf(values.layout) >= 0 ? values.layout : DEFAULTS.layout;
     var photo = (options && options.photoUrl) || values.photo || LOGO;
     var links = (values.links || []).filter(function (link) {
       return link && (link.title || safeLink(link.url));
@@ -75,11 +80,11 @@
       style + "\n" +
       "</head>\n" +
       "<body>\n" +
-      '<main class="card">\n' +
+      '<main class="card layout-' + layout + '">\n' +
       '<img class="avatar" src="' + escape(photo) + '" alt="" width="112" height="112" />\n' +
       "<h1>" + escape(name) + "</h1>\n" +
       '<p class="tagline">' + escape(tagline) + "</p>\n" +
-      about + list + "\n" +
+      (layout === "links" ? list + about : about + list) + "\n" +
       "</main>\n" +
       '<footer><a href="https://naru.pub">나루</a>에 띄운 홈페이지</footer>\n' +
       "</body>\n" +
@@ -87,7 +92,13 @@
     );
   }
 
-  var api = { render: render, safeLink: safeLink, ACCENTS: ACCENTS, DEFAULTS: DEFAULTS };
+  var api = {
+    render: render,
+    safeLink: safeLink,
+    ACCENTS: ACCENTS,
+    LAYOUTS: LAYOUTS,
+    DEFAULTS: DEFAULTS,
+  };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.ProfilePage = api;
 })(this);

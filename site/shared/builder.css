@@ -1,3 +1,4 @@
+/* The form, preview and buttons every builder of this site shares. */
 :root {
   --ink: #2c2c2a;
   --muted: #5f5e5a;
@@ -176,6 +177,77 @@ textarea {
 .accents button[aria-pressed="true"] {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
+}
+
+/* Fields one under another, inside a fieldset. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* A list the owner adds to: each item its fields in a card. */
+.entries {
+  list-style: none;
+  margin: 6px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.entries li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.entry-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.link.danger {
+  color: #c0392b;
+}
+
+/* A choice of a few, as buttons in a row (radio inputs inside labels). */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.choices label {
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 120px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.choices label:has(input:checked) {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: 1px solid var(--accent);
+}
+
+.choices input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--accent);
 }
 
 /* A quick second tap is another tap, not a zoom. */

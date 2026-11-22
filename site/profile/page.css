@@ -108,6 +108,31 @@ h1 {
   color: #fff;
 }
 
+/* The link page: big buttons in the accent color, first under the name. */
+.card.layout-links .links {
+  gap: 12px;
+}
+
+.card.layout-links .links a {
+  padding: 16px;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.card.layout-links .links a:hover,
+.card.layout-links .links a:focus-visible {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.card.layout-links .about {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 footer {
   font-size: 0.8rem;
   color: var(--muted);

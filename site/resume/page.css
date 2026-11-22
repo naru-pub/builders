@@ -1,0 +1,217 @@
+/* 이력서: the page this builder makes, as its owner's style.css. */
+:root {
+  --accent: #2e6b61;
+  --paper: #ffffff;
+  --ground: #f4f2ec;
+  --ink: #2c2c2a;
+  --muted: #5f5e5a;
+  --line: #d3d1c7;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1f1f1d;
+    --ground: #151514;
+    --ink: #f1efe8;
+    --muted: #b4b2a9;
+    --line: #444441;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 32px 16px 40px;
+  background: var(--ground);
+  color: var(--ink);
+  font-family:
+    "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.resume {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 36px;
+  background: var(--paper);
+  border-top: 6px solid var(--accent);
+  border-radius: 4px;
+}
+
+@media (max-width: 560px) {
+  .resume {
+    padding: 28px 20px;
+  }
+}
+
+.top {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Nothing below it yet: no line to set it apart. */
+.top:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.photo {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.role {
+  margin: 4px 0 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.contacts li {
+  overflow-wrap: anywhere;
+}
+
+.contacts a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+section {
+  margin-top: 28px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.summary {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.item + .item {
+  margin-top: 18px;
+}
+
+.item-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 16px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.item-role {
+  margin-left: 6px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.period {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.details {
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills li {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+footer {
+  max-width: 760px;
+  margin: 16px auto 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+footer a {
+  color: inherit;
+}
+
+/* On paper: the page alone, in black on white, items kept whole. */
+@media print {
+  :root {
+    --paper: #fff;
+    --ground: #fff;
+    --ink: #000;
+    --muted: #444;
+    --line: #bbb;
+    color-scheme: light;
+  }
+  body {
+    padding: 0;
+  }
+  .resume {
+    max-width: none;
+    padding: 0;
+    border-top-width: 4px;
+  }
+  .item {
+    break-inside: avoid;
+  }
+  h2 {
+    break-after: avoid;
+  }
+  .contacts a {
+    text-decoration: none;
+  }
+  footer {
+    display: none;
+  }
+}

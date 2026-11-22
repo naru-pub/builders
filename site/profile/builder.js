@@ -60,6 +60,15 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
     });
   });
 
+  // The layout.
+  Array.prototype.forEach.call(form.elements.layout, function (input) {
+    input.checked = input.value === (values.layout || Page.DEFAULTS.layout);
+    input.addEventListener("change", function () {
+      values.layout = input.value;
+      update();
+    });
+  });
+
   // Links.
   function drawLinks() {
     linksList.innerHTML = "";

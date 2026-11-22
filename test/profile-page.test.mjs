@@ -31,6 +31,17 @@ test("reads well with nothing written, linking its stylesheet and photo", () => 
   assert.ok(render({}, { inlineStyle: "body{}" }).includes("<style>body{}</style>"));
 });
 
+test("puts the links first, as buttons, on a link page", () => {
+  const values = { about: "소개", links: [{ title: "블로그", url: "/blog/" }] };
+  const card = render(values);
+  assert.ok(card.includes('class="card layout-card"'));
+  assert.ok(card.indexOf('class="about"') < card.indexOf('class="links"'));
+  const links = render({ ...values, layout: "links" });
+  assert.ok(links.includes('class="card layout-links"'));
+  assert.ok(links.indexOf('class="links"') < links.indexOf('class="about"'));
+  assert.ok(render({ layout: '"><script>' }).includes('class="card layout-card"'));
+});
+
 test("takes only the accents it offers", () => {
   assert.ok(render({ accent: "#378ADD" }).includes("--accent: #378ADD"));
   assert.ok(render({ accent: "red;}" }).includes(`--accent: ${DEFAULTS.accent}`));
