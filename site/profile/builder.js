@@ -1,4 +1,4 @@
-// The 소개 페이지 builder (https://naru.pub/docs/builders): the owner fills in
+// The 소개 페이지 builder (https://naru.pub/docs/launch): the owner fills in
 // the form, sees the page as it will be, and hands it to Naru. What they wrote
 // is kept in this browser (localStorage), so they can come back and change it.
 import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";

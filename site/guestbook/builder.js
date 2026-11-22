@@ -1,4 +1,4 @@
-// The 방명록 builder (https://naru.pub/docs/builders): the owner picks where
+// The 방명록 builder (https://naru.pub/docs/launch): the owner picks where
 // their guestbook goes and its color, sees it as it will be,
 // and hands it to Naru as the builder "guestbook" with the collection its
 // page uses, which Naru creates once they approve. What they wrote is kept

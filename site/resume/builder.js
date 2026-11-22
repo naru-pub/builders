@@ -1,4 +1,4 @@
-// The 이력서 builder (https://naru.pub/docs/builders): the owner fills in the
+// The 이력서 builder (https://naru.pub/docs/launch): the owner fills in the
 // form, sees the page as it will be, and hands it to Naru as the builder
 // "resume". What they wrote is kept in this browser (localStorage), so they
 // can come back and change it.

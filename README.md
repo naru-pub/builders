@@ -5,7 +5,7 @@ websites that make someone's [Naru](https://naru.pub) site. A visitor makes
 their page here and presses 나루에 띄우기; the builder hands the files to
 Naru, where the site's owner sees what would change and applies it. They use
 the same handoff as anyone's builder, the SDK's
-[`handoff.js`](https://naru.pub/docs/builders).
+[`handoff.js`](https://naru.pub/docs/launch).
 
 `site/` is what builders.naru.pub serves:
 
