@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>나루 빌더</title>
+    <meta name="description" content="몇 가지를 고르고 쓰면 내 나루 사이트가 만들어지는 곳들" />
+    <!-- The list of Naru's own builders. It is not a builder itself: each
+         builder is a folder of this site, and hands its files to Naru on its
+         own (https://naru.pub/docs/builders). -->
+    <style>
+      :root {
+        --ink: #2c2c2a;
+        --muted: #5f5e5a;
+        --line: #d3d1c7;
+        --paper: #ffffff;
+        --ground: #f4f2ec;
+        --accent: #2e6b61;
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #f1efe8;
+          --muted: #b4b2a9;
+          --line: #444441;
+          --paper: #1f1f1d;
+          --ground: #151514;
+          --accent: #8bd0c3;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+        line-height: 1.6;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 40px 16px 56px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.8rem;
+      }
+      .lead {
+        margin: 0 0 28px;
+        color: var(--muted);
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+      a.builder {
+        display: block;
+        padding: 18px 20px;
+        background: var(--paper);
+        border: 2px solid var(--line);
+        color: inherit;
+        text-decoration: none;
+      }
+      a.builder:hover,
+      a.builder:focus-visible {
+        border-color: var(--accent);
+      }
+      a.builder strong {
+        display: block;
+        font-size: 1.15rem;
+        color: var(--accent);
+      }
+      a.builder span {
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 36px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>나루 빌더</h1>
+      <p class="lead">
+        몇 가지를 고르고 쓰면 홈페이지가 만들어져요. 다 만들면 ‘내 사이트에 적용’을
+        눌러 내 나루 사이트에 바로 올려요. 적용하기 전에 무엇이 바뀌는지 나루에서
+        확인해요.
+      </p>
+      <ul>
+        <li>
+          <a class="builder" href="profile/">
+            <strong>소개 페이지</strong>
+            <span>사진, 이름, 소개와 링크를 한 장에 담은 홈페이지</span>
+          </a>
+        </li>
+      </ul>
+      <footer>
+        <p>
+          나루 앱의 ‘내 사이트’에서도 만들 수 있어요. 나만의 빌더를 만들고 싶다면
+          <a href="https://naru.pub/docs/builders">빌더 만들기</a>를 보세요.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

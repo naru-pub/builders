@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소개 페이지 만들기 · 나루</title>
+    <link rel="stylesheet" href="builder.css" />
+  </head>
+  <body>
+    <header>
+      <h1>소개 페이지 만들기</h1>
+      <p>사진, 이름, 소개와 링크를 한 장에 담은 홈페이지예요. 다 고치면 ‘내 사이트에 적용’을 누르세요.</p>
+    </header>
+    <div class="layout">
+      <section class="preview" aria-label="미리 보기">
+        <iframe id="preview" title="미리 보기" sandbox></iframe>
+      </section>
+      <form id="form" class="form">
+        <fieldset>
+          <legend>프로필 사진</legend>
+          <div class="photo">
+            <img id="photo-thumb" alt="" />
+            <div>
+              <label class="button secondary">
+                사진 고르기
+                <input id="photo" type="file" accept="image/*" hidden />
+              </label>
+              <button id="photo-remove" type="button" class="link" hidden>사진 빼기</button>
+            </div>
+          </div>
+          <p class="help">정사각형 사진이 가장 잘 어울려요. 사진은 크기를 줄이고, 찍은 곳 같은 정보는 지운 뒤 올려요.</p>
+        </fieldset>
+        <label>이름 <input name="name" maxlength="40" placeholder="나루" autocomplete="off" /></label>
+        <label>한 줄 소개 <input name="tagline" maxlength="80" placeholder="나루에 띄운 작은 홈페이지예요." /></label>
+        <label>소개 <textarea name="about" rows="4" maxlength="1000"></textarea></label>
+        <fieldset>
+          <legend>링크</legend>
+          <ol id="links" class="links"></ol>
+          <button id="link-add" type="button" class="link">+ 링크 추가</button>
+        </fieldset>
+        <fieldset>
+          <legend>강조색</legend>
+          <div id="accents" class="accents"></div>
+        </fieldset>
+        <button id="apply" type="button" class="button">내 사이트에 적용</button>
+        <p id="status" class="status" role="status"></p>
+      </form>
+    </div>
+    <script src="page.js"></script>
+    <script type="module" src="builder.js"></script>
+  </body>
+</html>
