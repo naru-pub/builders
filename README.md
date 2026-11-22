@@ -2,7 +2,7 @@
 
 [builders.naru.pub](https://builders.naru.pub): Naru's own builders,
 websites that make someone's [Naru](https://naru.pub) site. A visitor makes
-their page here and presses 내 사이트에 적용; the builder hands the files to
+their page here and presses 나루로 띄우기; the builder hands the files to
 Naru, where the site's owner sees what would change and applies it. They use
 the same handoff as anyone's builder, the SDK's
 [`handoff.js`](https://naru.pub/docs/builders).

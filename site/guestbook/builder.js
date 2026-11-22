@@ -106,8 +106,8 @@ import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
       function (result) {
         apply.disabled = false;
         status.textContent = result.applied
-          ? "적용했어요. " + result.url
-          : "적용하지 않았어요.";
+          ? "띄웠어요. " + result.url
+          : "띄우지 않았어요.";
       },
       function (error) {
         apply.disabled = false;
