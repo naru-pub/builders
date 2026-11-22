@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: node --test test/
+      - run: node --test "test/*.test.mjs"
   # Publishes site/ to builders.naru.pub, only from main and only once the
   # tests pass. Naru checks the workflow's GitHub OIDC token against the
   # target registered for this repository and branch on naru.pub/github; it

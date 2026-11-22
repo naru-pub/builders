@@ -45,7 +45,7 @@ It hands files to naru.pub as it would from builders.naru.pub, so try it with
 your own Naru site: nothing is written until you approve it there.
 
 ```bash
-node --test test/
+node --test "test/*.test.mjs"
 ```
 
 ## Publish
