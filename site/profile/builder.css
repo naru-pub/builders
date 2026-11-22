@@ -108,9 +108,13 @@ label {
   gap: 6px;
 }
 
+/* 16px at least: iOS zooms the page in on a field whose text is smaller,
+   and these sit in labels set smaller and bold. */
 input,
 textarea {
   font: inherit;
+  font-size: max(1rem, 16px);
+  font-weight: 400;
   color: inherit;
   background: transparent;
   border: 1px solid var(--line);
@@ -172,6 +176,13 @@ textarea {
 .accents button[aria-pressed="true"] {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
+}
+
+/* A quick second tap is another tap, not a zoom. */
+button,
+.button,
+.link {
+  touch-action: manipulation;
 }
 
 .button {
