@@ -38,8 +38,12 @@ node --test test/
 
 ## Publish
 
-Pushes to `main` publish `site/` to builders.naru.pub through Naru's GitHub
-App (source folder `site`, the site's root).
+Pushes to `main` publish `site/` to builders.naru.pub once the tests pass:
+the `deploy` job in `.github/workflows/main.yml` runs Naru's
+[deploy action](https://github.com/naru-pub/actions), which signs in with the
+workflow's GitHub token. It needs this repository's `main` registered as a
+deploy target of the `builders` site, at its root, on
+[naru.pub/github](https://naru.pub/github).
 
 ## License
 
