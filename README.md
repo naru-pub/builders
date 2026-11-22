@@ -15,6 +15,13 @@ the same handoff as anyone's builder, the SDK's
   buttons first).
 - `resume/`: 이력서, a name and role, contacts, experience, education and
   skills, also laid out for printing.
+- `guestbook/`: 방명록, where visitors leave a name and a message, as its own
+  page (`guestbook/`) or the site's home page. It hands Naru the site's
+  `guestbook` collection with the page (`propose({ collections })`): anyone
+  reads it and adds to it, only the owner deletes. The page's
+  `guestbook.js` reads and adds entries with the Naru Data SDK, and the
+  owner signs in on the page (관리) to delete them. It works on sites with
+  the database.
 - `shared/`: the form and preview styles every builder uses.
 
 In each builder, `page.js` makes the page and `page.css` is its stylesheet,
