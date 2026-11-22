@@ -133,7 +133,7 @@ import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
     },
     function () {
       apply.disabled = true;
-      status.textContent = "빌더를 불러오지 못했어요. 새로 고침해 주세요.";
+      status.textContent = "페이지를 불러오지 못했어요. 새로 고침해 주세요.";
     },
   );
 })();
