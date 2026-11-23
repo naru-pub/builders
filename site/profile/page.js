@@ -81,9 +81,13 @@
       "</head>\n" +
       "<body>\n" +
       '<main class="card layout-' + layout + '">\n' +
-      '<img class="avatar" src="' + escape(photo) + '" alt="" width="112" height="112" />\n' +
+      '<header class="who">\n' +
+      '<img class="avatar" src="' + escape(photo) + '" alt="" width="88" height="88" />\n' +
+      "<div>\n" +
       "<h1>" + escape(name) + "</h1>\n" +
       '<p class="tagline">' + escape(tagline) + "</p>\n" +
+      "</div>\n" +
+      "</header>\n" +
       (layout === "links" ? list + about : about + list) + "\n" +
       "</main>\n" +
       '<footer><a href="https://naru.pub">나루</a>에 띄운 홈페이지</footer>\n' +

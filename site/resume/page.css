@@ -1,21 +1,22 @@
-/* 이력서: the page this maker makes, as its owner's style.css. */
+/* 이력서: the page this maker makes, as its owner's style.css.
+   Set like a printed CV rather than a card on a backdrop: one sheet of
+   paper, the section names in a column of their own, rules between the
+   sections, dates set in figures that line up. */
 :root {
   --accent: #2e6b61;
-  --paper: #ffffff;
-  --ground: #f4f2ec;
-  --ink: #2c2c2a;
-  --muted: #5f5e5a;
-  --line: #d3d1c7;
+  --paper: #fdfcf9;
+  --ink: #1f1f1d;
+  --muted: #64625c;
+  --line: #d9d6cc;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #1f1f1d;
-    --ground: #151514;
+    --paper: #1a1a18;
     --ink: #f1efe8;
-    --muted: #b4b2a9;
-    --line: #444441;
+    --muted: #a5a39a;
+    --line: #3d3c39;
   }
 }
 
@@ -25,35 +26,36 @@
 
 body {
   margin: 0;
-  padding: 32px 16px 40px;
-  background: var(--ground);
+  padding: clamp(32px, 8vh, 80px) 20px 40px;
+  background: var(--paper);
   color: var(--ink);
   font-family:
     "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
-  line-height: 1.6;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
 }
 
 .resume {
-  max-width: 760px;
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 40px 36px;
-  background: var(--paper);
-  border-top: 6px solid var(--accent);
-  border-radius: 4px;
-}
-
-@media (max-width: 560px) {
-  .resume {
-    padding: 28px 20px;
-  }
 }
 
 .top {
   display: flex;
-  gap: 20px;
-  align-items: center;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--line);
+  gap: 24px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.top > div {
+  min-width: 0;
 }
 
 /* Nothing below it yet: no line to set it apart. */
@@ -63,32 +65,31 @@ body {
 }
 
 .photo {
+  order: 1;
   flex: none;
   width: 96px;
-  height: 96px;
-  border-radius: 50%;
+  height: 120px;
+  border-radius: 2px;
   object-fit: cover;
 }
 
 h1 {
   margin: 0;
-  font-size: 2rem;
-  line-height: 1.25;
+  font-size: clamp(2rem, 7vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   overflow-wrap: anywhere;
 }
 
 .role {
-  margin: 4px 0 0;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 1.1rem;
+  margin: 6px 0 0;
+  font-size: 1.15rem;
 }
 
 .contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 16px;
-  margin: 10px 0 0;
+  margin: 14px 0 0;
   padding: 0;
   list-style: none;
   color: var(--muted);
@@ -99,20 +100,56 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+.contacts li + li::before {
+  content: "·";
+  margin: 0 0.6em;
+}
+
 .contacts a {
   color: inherit;
+  text-decoration-color: var(--line);
   text-underline-offset: 3px;
 }
 
+.contacts a:hover,
+.contacts a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+/* Each section a row: its name on the left, what is in it on the right. */
 section {
-  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 20px 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+section:last-of-type {
+  border-bottom: 0;
 }
 
 h2 {
-  margin: 0 0 12px;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
   color: var(--accent);
+}
+
+/* Everything after the name in the right column, one under another. */
+section > :not(h2) {
+  grid-column: 2;
+}
+
+@media (max-width: 560px) {
+  section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  section > :not(h2) {
+    grid-column: 1;
+  }
 }
 
 .summary {
@@ -120,62 +157,74 @@ h2 {
   overflow-wrap: anywhere;
 }
 
-.item + .item {
-  margin-top: 18px;
-}
-
-.item-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
+/* An item: what and where on the left, when on the right, then the
+   details under both. */
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "head period"
+    "details details";
   gap: 0 16px;
+  align-items: baseline;
 }
 
 h3 {
+  grid-area: head;
   margin: 0;
   font-size: 1.05rem;
   overflow-wrap: anywhere;
 }
 
 .item-role {
-  margin-left: 6px;
+  margin-left: 4px;
   font-weight: 400;
   color: var(--muted);
 }
 
 .period {
+  grid-area: period;
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
+@media (max-width: 560px) {
+  .item {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "period"
+      "details";
+  }
+}
+
 .details {
+  grid-area: details;
   margin: 6px 0 0;
   overflow-wrap: anywhere;
 }
 
+/* Skills as a line of words, not a row of badges. */
 .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.skills li {
-  padding: 4px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.95rem;
+.skills li + li::before {
+  content: "·";
+  margin: 0 0.6em;
+  color: var(--muted);
 }
 
 footer {
-  max-width: 760px;
-  margin: 16px auto 0;
-  text-align: center;
+  max-width: 48rem;
+  margin: 32px auto 0;
   font-size: 0.8rem;
   color: var(--muted);
 }
@@ -184,11 +233,10 @@ footer a {
   color: inherit;
 }
 
-/* On paper: the page alone, in black on white, items kept whole. */
+/* On paper: black on white, items kept whole. */
 @media print {
   :root {
     --paper: #fff;
-    --ground: #fff;
     --ink: #000;
     --muted: #444;
     --line: #bbb;
@@ -199,8 +247,6 @@ footer a {
   }
   .resume {
     max-width: none;
-    padding: 0;
-    border-top-width: 4px;
   }
   .item {
     break-inside: avoid;

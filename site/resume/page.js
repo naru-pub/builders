@@ -96,11 +96,10 @@
     var experience = filled(values.experience, ["org", "title", "period", "details"]).map(function (item) {
       return (
         '<article class="item">\n' +
-        '<div class="item-head"><h3>' + escape(item.org || "") +
+        (item.period ? '<p class="period">' + escape(item.period) + "</p>\n" : "") +
+        "<h3>" + escape(item.org || "") +
         (item.title ? ' <span class="item-role">' + escape(item.title) + "</span>" : "") +
-        "</h3>" +
-        (item.period ? '<p class="period">' + escape(item.period) + "</p>" : "") +
-        "</div>\n" +
+        "</h3>\n" +
         (item.details ? '<p class="details">' + lines(item.details) + "</p>\n" : "") +
         "</article>\n"
       );
@@ -108,11 +107,10 @@
     var education = filled(values.education, ["school", "major", "period"]).map(function (item) {
       return (
         '<article class="item">\n' +
-        '<div class="item-head"><h3>' + escape(item.school || "") +
+        (item.period ? '<p class="period">' + escape(item.period) + "</p>\n" : "") +
+        "<h3>" + escape(item.school || "") +
         (item.major ? ' <span class="item-role">' + escape(item.major) + "</span>" : "") +
-        "</h3>" +
-        (item.period ? '<p class="period">' + escape(item.period) + "</p>" : "") +
-        "</div>\n" +
+        "</h3>\n" +
         "</article>\n"
       );
     }).join("");
