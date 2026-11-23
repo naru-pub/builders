@@ -1,9 +1,9 @@
 // The 방명록 on the owner's site: reads the entries of the site's `guestbook`
-// collection, newest first, and adds a visitor's. The builder declares the
+// collection, newest first, and adds a visitor's. The maker declares the
 // collection (anyone reads it, anyone adds to it, no one but the owner
 // changes or deletes), so it exists once the owner applies the page. The
 // owner signs in here (관리) to delete entries.
-// https://github.com/naru-pub/builders, site/guestbook/.
+// https://github.com/naru-pub/makers, site/guestbook/.
 import { createNaru, NaruError } from "https://sdk.naru.pub/sdk/1/naru.js";
 
 const COLLECTION = "guestbook";

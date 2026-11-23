@@ -1,6 +1,6 @@
-// The 소개 페이지 this builder makes, as plain HTML: every value escaped, so
+// The 소개 페이지 this maker makes, as plain HTML: every value escaped, so
 // what the owner writes is only ever text, and links limited to the site's own
-// paths, http(s), mailto and tel. Loaded by the builder (window.ProfilePage)
+// paths, http(s), mailto and tel. Loaded by the maker (window.ProfilePage)
 // and by its tests (module.exports).
 (function (root) {
   "use strict";
@@ -40,7 +40,7 @@
   /**
    * The page from the owner's values: { layout, name, tagline, about, links, accent }
    * and `photo`, the photo's file name on the site if there is one. With
-   * `inlineStyle`, the stylesheet goes in the page (the builder's preview);
+   * `inlineStyle`, the stylesheet goes in the page (the maker's preview);
    * otherwise it links style.css.
    */
   function render(input, options) {

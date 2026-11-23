@@ -1,7 +1,7 @@
-// The 이력서 this builder makes, as plain HTML: every value escaped, so what
+// The 이력서 this maker makes, as plain HTML: every value escaped, so what
 // the owner writes is only ever text; links limited to the site's own paths,
 // http(s), mailto and tel; and sections with nothing in them left out. Loaded
-// by the builder (window.ResumePage) and by its tests (module.exports).
+// by the maker (window.ResumePage) and by its tests (module.exports).
 (function (root) {
   "use strict";
 
@@ -68,7 +68,7 @@
   /**
    * The page from the owner's values (DEFAULTS' keys) and `photo`, the
    * photo's file name on the site if there is one. With `inlineStyle`, the
-   * stylesheet goes in the page (the builder's preview); otherwise it links
+   * stylesheet goes in the page (the maker's preview); otherwise it links
    * style.css.
    */
   function render(input, options) {

@@ -1,4 +1,4 @@
-// node --test test/: the page the 이력서 builder makes.
+// node --test test/: the page the 이력서 maker makes.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";

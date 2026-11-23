@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 24
       - run: node --test "test/*.test.mjs"
-  # Publishes site/ to builders.naru.pub, only from main and only once the
+  # Publishes site/ to makers.naru.pub, only from main and only once the
   # tests pass. Naru checks the workflow's GitHub OIDC token against the
   # target registered for this repository and branch on naru.pub/github; it
   # deletes what an earlier deploy published and this commit no longer has.
@@ -31,6 +31,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: naru-pub/actions/deploy@v1
         with:
-          site: builders
+          site: makers
           dir: site
           target: /

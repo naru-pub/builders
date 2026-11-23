@@ -1,4 +1,4 @@
-// node builders/test/profile-page.test.mjs: the page the 소개 페이지 builder makes.
+// node makers/test/profile-page.test.mjs: the page the 소개 페이지 maker makes.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";

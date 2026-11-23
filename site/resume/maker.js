@@ -1,21 +1,52 @@
-// The 소개 페이지 builder (https://naru.pub/docs/launch): the owner fills in
-// the form, sees the page as it will be, and hands it to Naru. What they wrote
-// is kept in this browser (localStorage), so they can come back and change it.
+// The 이력서 maker (https://naru.pub/docs/launch): the owner fills in the
+// form, sees the page as it will be, and hands it to Naru as the maker
+// "resume". What they wrote is kept in this browser (localStorage), so they
+// can come back and change it.
 import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
 
 (function () {
   "use strict";
-  var Page = window.ProfilePage;
-  var KEY = "naru-profile-builder";
-  var MAX_LINKS = 12;
+  var Page = window.ResumePage;
+  // Makers on this site share an origin, and so the browser's storage.
+  var KEY = "naru-resume-maker";
   var form = document.getElementById("form");
   var preview = document.getElementById("preview");
   var status = document.getElementById("status");
-  var linksList = document.getElementById("links");
   var pageStyle = "";
   var photo = null; // { blob, url, type }
 
-  var values = Object.assign({ links: [] }, read());
+  // The lists the owner adds to, and the fields of each item.
+  var LISTS = {
+    links: {
+      max: 8,
+      fields: [
+        { key: "title", label: "이름", placeholder: "블로그", max: 40 },
+        { key: "url", label: "주소", placeholder: "https://", type: "url" },
+      ],
+    },
+    experience: {
+      max: 12,
+      fields: [
+        { key: "org", label: "회사·단체", placeholder: "나루", max: 60 },
+        { key: "title", label: "맡은 일", placeholder: "디자이너", max: 60 },
+        { key: "period", label: "기간", placeholder: "2023.03 – 지금", max: 40 },
+        { key: "details", label: "한 일", multiline: true, max: 1000 },
+      ],
+    },
+    education: {
+      max: 8,
+      fields: [
+        { key: "school", label: "학교", placeholder: "나루대학교", max: 60 },
+        { key: "major", label: "전공", placeholder: "시각디자인", max: 60 },
+        { key: "period", label: "기간", placeholder: "2015 – 2019", max: 40 },
+      ],
+    },
+  };
+
+  var values = Object.assign({}, read());
+  Object.keys(LISTS).forEach(function (name) {
+    if (!Array.isArray(values[name])) values[name] = [];
+  });
 
   function read() {
     try {
@@ -29,7 +60,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
     try {
       localStorage.setItem(KEY, JSON.stringify(values));
     } catch (e) {
-      // A private window keeps nothing; the builder still works.
+      // A private window keeps nothing; the maker still works.
     }
   }
 
@@ -51,7 +82,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
   }
 
   // Text fields.
-  ["name", "tagline", "about"].forEach(function (field) {
+  ["name", "role", "summary", "email", "phone", "location", "skills"].forEach(function (field) {
     var input = form.elements[field];
     input.value = values[field] || "";
     input.addEventListener("input", function () {
@@ -60,54 +91,68 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
     });
   });
 
-  // The layout.
-  Array.prototype.forEach.call(form.elements.layout, function (input) {
-    input.checked = input.value === (values.layout || Page.DEFAULTS.layout);
-    input.addEventListener("change", function () {
-      values.layout = input.value;
-      update();
-    });
-  });
-
-  // Links.
-  function drawLinks() {
-    linksList.innerHTML = "";
-    values.links.forEach(function (link, index) {
-      var item = document.createElement("li");
-      var title = document.createElement("input");
-      title.placeholder = "이름";
-      title.maxLength = 40;
-      title.value = link.title || "";
-      title.addEventListener("input", function () {
-        values.links[index].title = title.value;
-        update();
+  // Lists: each item's fields, a way to move it up, and to remove it.
+  function drawList(name) {
+    var config = LISTS[name];
+    var list = document.getElementById(name);
+    list.innerHTML = "";
+    values[name].forEach(function (item, index) {
+      var entry = document.createElement("li");
+      config.fields.forEach(function (field) {
+        var label = document.createElement("label");
+        label.textContent = field.label + " ";
+        var input = document.createElement(field.multiline ? "textarea" : "input");
+        if (field.multiline) input.rows = 3;
+        else if (field.type) input.type = field.type;
+        if (field.placeholder) input.placeholder = field.placeholder;
+        if (field.max) input.maxLength = field.max;
+        input.value = item[field.key] || "";
+        input.addEventListener("input", function () {
+          values[name][index][field.key] = input.value;
+          update();
+        });
+        label.append(input);
+        entry.append(label);
       });
-      var url = document.createElement("input");
-      url.placeholder = "https://";
-      url.type = "url";
-      url.value = link.url || "";
-      url.addEventListener("input", function () {
-        values.links[index].url = url.value;
-        update();
-      });
+      var actions = document.createElement("div");
+      actions.className = "entry-actions";
+      if (index > 0) {
+        var up = document.createElement("button");
+        up.type = "button";
+        up.className = "link";
+        up.textContent = "위로";
+        up.addEventListener("click", function () {
+          var moved = values[name].splice(index, 1)[0];
+          values[name].splice(index - 1, 0, moved);
+          drawList(name);
+          update();
+        });
+        actions.append(up);
+      }
       var remove = document.createElement("button");
       remove.type = "button";
-      remove.className = "link";
+      remove.className = "link danger";
       remove.textContent = "삭제";
       remove.addEventListener("click", function () {
-        values.links.splice(index, 1);
-        drawLinks();
+        values[name].splice(index, 1);
+        drawList(name);
         update();
       });
-      item.append(title, url, remove);
-      linksList.append(item);
+      actions.append(remove);
+      entry.append(actions);
+      list.append(entry);
     });
-    document.getElementById("link-add").hidden = values.links.length >= MAX_LINKS;
+    form.querySelector('[data-add="' + name + '"]').hidden = values[name].length >= config.max;
   }
-  document.getElementById("link-add").addEventListener("click", function () {
-    values.links.push({ title: "", url: "" });
-    drawLinks();
-    update();
+  Object.keys(LISTS).forEach(function (name) {
+    form.querySelector('[data-add="' + name + '"]').addEventListener("click", function () {
+      values[name].push({});
+      drawList(name);
+      update();
+      // Straight to the new item's first field.
+      var inputs = document.getElementById(name).querySelectorAll("li:last-child input, li:last-child textarea");
+      if (inputs[0]) inputs[0].focus();
+    });
   });
 
   // Accent colors.
@@ -142,7 +187,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
 
   // The photo: resized and stripped of its metadata in this browser.
   var thumb = document.getElementById("photo-thumb");
-  var remove = document.getElementById("photo-remove");
+  var removePhoto = document.getElementById("photo-remove");
   document.getElementById("photo").addEventListener("change", function (event) {
     var file = event.target.files && event.target.files[0];
     event.target.value = "";
@@ -153,7 +198,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
         // A data URL, which the sandboxed preview can load as well.
         photo = { blob: prepared.blob, url: prepared.url, type: prepared.blob.type };
         thumb.src = photo.url;
-        remove.hidden = false;
+        removePhoto.hidden = false;
         status.textContent = "";
         update();
       },
@@ -162,10 +207,10 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
       },
     );
   });
-  remove.addEventListener("click", function () {
+  removePhoto.addEventListener("click", function () {
     photo = null;
     thumb.removeAttribute("src");
-    remove.hidden = true;
+    removePhoto.hidden = true;
     update();
   });
 
@@ -181,7 +226,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
     if (photo) files.push({ path: name, data: photo.blob });
     apply.disabled = true;
     status.textContent = "나루에서 확인해 주세요…";
-    propose({ builder: "profile", title: "소개 페이지", files: files }).then(
+    propose({ maker: "resume", title: "이력서", files: files }).then(
       function (result) {
         apply.disabled = false;
         status.textContent = result.applied
@@ -199,7 +244,7 @@ import { photo as preparePhoto, propose } from "https://sdk.naru.pub/sdk/1.2.0/h
     .then(function (response) { return response.text(); })
     .then(function (css) {
       pageStyle = css;
-      drawLinks();
+      Object.keys(LISTS).forEach(drawList);
       drawAccents();
       update();
     });

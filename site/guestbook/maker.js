@@ -1,6 +1,6 @@
-// The 방명록 builder (https://naru.pub/docs/launch): the owner picks where
+// The 방명록 maker (https://naru.pub/docs/launch): the owner picks where
 // their guestbook goes and its color, sees it as it will be,
-// and hands it to Naru as the builder "guestbook" with the collection its
+// and hands it to Naru as the maker "guestbook" with the collection its
 // page uses, which Naru creates once they approve. What they wrote is kept
 // in this browser (localStorage), so they can come back and change it.
 import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
@@ -8,8 +8,8 @@ import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
 (function () {
   "use strict";
   var Page = window.GuestbookPage;
-  // Builders on this site share an origin, and so the browser's storage.
-  var KEY = "naru-guestbook-builder";
+  // Makers on this site share an origin, and so the browser's storage.
+  var KEY = "naru-guestbook-maker";
   // Where the page goes: its own folder, beside the owner's home page, or
   // the home page itself.
   var PLACES = {
@@ -37,7 +37,7 @@ import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
     try {
       localStorage.setItem(KEY, JSON.stringify(values));
     } catch (e) {
-      // A private window keeps nothing; the builder still works.
+      // A private window keeps nothing; the maker still works.
     }
   }
 
@@ -93,7 +93,7 @@ import { propose } from "https://sdk.naru.pub/sdk/1.2.0/handoff.js";
     apply.disabled = true;
     status.textContent = "나루에서 확인해 주세요…";
     propose({
-      builder: "guestbook",
+      maker: "guestbook",
       title: "방명록",
       target: PLACES[place()].target,
       collections: collections,

@@ -1,9 +1,9 @@
-// The 방명록 this builder makes, as plain HTML: every value escaped, so what
+// The 방명록 this maker makes, as plain HTML: every value escaped, so what
 // the owner writes is only ever text. The entries are not in the page: on the
 // owner's site guestbook.js reads and adds them through Naru Data (the
 // `guestbook` collection, which anyone reads and anyone adds to). The
-// builder's preview runs no scripts, so it shows a few sample entries
-// instead. Loaded by the builder (window.GuestbookPage) and by its tests
+// maker's preview runs no scripts, so it shows a few sample entries
+// instead. Loaded by the maker (window.GuestbookPage) and by its tests
 // (module.exports).
 (function (root) {
   "use strict";
@@ -12,7 +12,7 @@
   var DEFAULTS = { accent: ACCENTS[0] };
   // The page's one name, as its title and its only heading.
   var TITLE = "guestbook";
-  // The collection the page reads and adds to, as the builder declares it.
+  // The collection the page reads and adds to, as the maker declares it.
   var COLLECTION = "guestbook";
   var SETTINGS = { read: "world", write: "create" };
   // What one entry may hold; guestbook.js checks the same before adding.
@@ -43,7 +43,7 @@
   /**
    * The page from the owner's values: { accent }. With
    * `inlineStyle`, the stylesheet goes in the page and sample entries stand
-   * in for the real ones (the builder's preview); otherwise it links
+   * in for the real ones (the maker's preview); otherwise it links
    * style.css and loads guestbook.js.
    */
   function render(input, options) {
